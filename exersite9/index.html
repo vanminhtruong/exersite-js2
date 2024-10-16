@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Gallery</title>
+    <style>
+        body {
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: #f0f0f0;
+        }
+
+        .container {
+            width: 100%;
+            text-align: center;
+        }
+
+        .main-image {
+            width: 100%;
+            height: 1300px;
+            max-height: 1200px; /* Để ảnh lớn không chiếm toàn bộ màn hình */
+            object-fit: cover; /* Đảm bảo ảnh được hiển thị đúng tỷ lệ */
+            transition: opacity 0.5s ease-in-out; /* Hiệu ứng mờ dần */
+        }
+
+        .thumbnail-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 10px;
+            flex-wrap: wrap; /* Cho phép ảnh con xuống dòng nếu không đủ chỗ */
+        }
+
+        .thumbnail {
+            width: 100px;
+            height: 100px;
+            margin: 5px;
+            cursor: pointer;
+            object-fit: cover;
+            border: 2px solid transparent;
+            transition: border 0.3s;
+        }
+
+        .thumbnail:hover {
+            border: 2px solid #007BFF; /* Thay đổi màu viền khi hover */
+        }
+
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <img id="main-image" src="img/leon0.png" alt="Main Image" class="main-image">
+        <div class="thumbnail-container">
+            <img src="img/leon1.png" alt="Thumbnail 1" class="thumbnail" onclick="changeImage('img/leon1.png')">
+            <img src="img/leon2.png" alt="Thumbnail 2" class="thumbnail" onclick="changeImage('img/leon2.png')">
+            <img src="img/leon3.png" alt="Thumbnail 3" class="thumbnail" onclick="changeImage('img/leon3.png')">
+            <img src="img/leon4.png" alt="Thumbnail 4" class="thumbnail" onclick="changeImage('img/leon4.png')">
+            <img src="img/leon5.png" alt="Thumbnail 5" class="thumbnail" onclick="changeImage('img/leon5.png')">
+            <img src="img/leon6.png" alt="Thumbnail 6" class="thumbnail" onclick="changeImage('img/leon6.png')">
+        </div>
+    </div>
+    <script>
+        function changeImage(imageSrc) {
+            const mainImage = document.getElementById('main-image');
+            mainImage.style.opacity = '0';
+            setTimeout(() => {
+                mainImage.src = imageSrc; 
+                mainImage.style.opacity = '1'; 
+            }, 500);
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .container {
+            width: 300px;
+            margin: 0 auto;
+            font-family: sans-serif;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        input[type="text"],
+        input[type="password"],
+        input[type="email"] {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0 20px 0;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+        }
+
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+        }
+        .error {
+            color: red;
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>SignUp</h1>
+        <form id="signupForm">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" placeholder="Username">
+            <div class="error" id="usernameError"></div>
+        
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" placeholder="Password">
+            <div class="error" id="passwordError"></div>
+        
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" placeholder="Email">
+            <div class="error" id="emailError"></div>
+        
+            <label for="fullname">FullName:</label>
+            <input type="text" id="fullname" name="fullname" placeholder="FullName">
+            <div class="error" id="fullnameError"></div>
+        
+            <input type="submit" value="Submit">
+        </form>
+    </div>
+    <script>
+        document.getElementById('signupForm').addEventListener('submit', function (event) {
+                event.preventDefault();
+                let isValid = true;
+
+                document.querySelectorAll('.error').forEach(error => error.textContent = '');
+
+                const fields = [
+                    { id: 'username', message: 'Username is required.', lengthMessage: 'Username must be 5-10 characters long.', minLength: 5, maxLength: 10 },
+                    { id: 'password', message: 'Password is required.', lengthMessage: 'Password must be 5-10 characters long.', minLength: 5, maxLength: 10 },
+                    { id: 'email', message: 'Email is required.' },
+                    { id: 'fullname', message: 'Full Name is required.' }
+                ];
+
+                fields.forEach(field => {
+                    const value = document.getElementById(field.id).value.trim();
+                    if (!value) {
+                        document.getElementById(`${field.id}Error`).textContent = field.message;
+                        isValid = false;
+                    }
+                });
+
+                if (isValid) {
+                    fields.forEach(field => {
+                        const value = document.getElementById(field.id).value.trim();
+                        if (field.minLength && field.maxLength) {
+                            if (value.length < field.minLength || value.length > field.maxLength) {
+                                document.getElementById(`${field.id}Error`).textContent = field.lengthMessage;
+                                isValid = false;
+                            }
+                        }
+                    });
+                }
+
+                if (isValid) {
+                    alert('Form submitted successfully!');
+                }
+            });
+    </script>
+</body>
+</html>
