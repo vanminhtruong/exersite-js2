@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Copy Matching List Items</title>
+</head>
+
+<body>
+    <ul id="list1">
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+        <li>5</li>
+        <li>6</li>
+        <li>7</li>
+        <li>10</li>
+    </ul>
+
+    <ul id="list2">
+        <li>3</li>
+        <li>4</li>
+        <li>5</li>
+        <li>8</li>
+        <li>9</li>
+        <li>10</li>
+        <li>12</li>
+    </ul>
+
+    <ul id="resultList"></ul>
+
+    <button id="copyButton">Copy</button>
+
+    <script>
+        document.getElementById('copyButton').addEventListener('click', function () {
+            // Lấy tất cả các phần tử li từ cả hai danh sách
+            const list1Items = Array.from(document.querySelectorAll('#list1 li')).map(li => li.textContent);
+            const list2Items = Array.from(document.querySelectorAll('#list2 li')).map(li => li.textContent);
+            const commonItems = list1Items.filter(item => list2Items.includes(item));
+            const resultList = document.getElementById('resultList');
+            resultList.innerHTML = '';
+            commonItems.forEach(item => {
+                const li = document.createElement('li');
+                li.textContent = item;
+                resultList.appendChild(li);
+            });
+        });
+    </script>
+</body>
+
+</html>
